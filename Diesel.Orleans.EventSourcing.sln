@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diesel.Orleans.EventSourcing", "src\Diesel.Orleans.EventSourcing\Diesel.Orleans.EventSourcing.csproj", "{19C0AD2D-7205-4AC9-B1A2-E98FD338628D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diesel.Orleans.EventSourcing.Tests", "src\Diesel.Orleans.EventSourcing.Tests\Diesel.Orleans.EventSourcing.Tests.csproj", "{EBF3549B-CDD6-473B-B04C-3C46131F5BC7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{19C0AD2D-7205-4AC9-B1A2-E98FD338628D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19C0AD2D-7205-4AC9-B1A2-E98FD338628D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19C0AD2D-7205-4AC9-B1A2-E98FD338628D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBF3549B-CDD6-473B-B04C-3C46131F5BC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBF3549B-CDD6-473B-B04C-3C46131F5BC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBF3549B-CDD6-473B-B04C-3C46131F5BC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBF3549B-CDD6-473B-B04C-3C46131F5BC7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
