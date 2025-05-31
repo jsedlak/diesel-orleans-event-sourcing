@@ -2,24 +2,29 @@ using Orleans.TestingHost;
 
 namespace Diesel.Orleans.EventSourcing.Tests;
 
-public abstract class OrleansTestBase<TConfigurator> : IDisposable
+public abstract class OrleansTestBase<TConfigurator>
     where TConfigurator : ISiloConfigurator, new()
 {
-    private readonly TestCluster _cluster;
+    private static TestCluster? _cluster;
 
-    protected OrleansTestBase()
+    static OrleansTestBase()
     {
         _cluster = new TestClusterBuilder()
             .AddSiloBuilderConfigurator<TConfigurator>()
             .Build();
-        
+
         _cluster.Deploy();
     }
 
-    public void Dispose()
+    protected OrleansTestBase()
     {
-        _cluster.StopAllSilos();
+
     }
+
+    //public void Dispose()
+    //{
+    //    _cluster.StopAllSilos();
+    //}
 
     protected IGrainFactory Grains => _cluster.GrainFactory;
 

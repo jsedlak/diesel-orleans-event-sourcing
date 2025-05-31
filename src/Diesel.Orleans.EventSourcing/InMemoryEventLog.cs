@@ -1,4 +1,3 @@
-using Diesel.Orleans.EventSourcing;
 using System.Collections.Concurrent;
 
 namespace Diesel.Orleans.EventSourcing;

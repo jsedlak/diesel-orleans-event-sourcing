@@ -1,5 +1,4 @@
 using System.Text.RegularExpressions;
-using Diesel.Orleans.EventSourcing;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Diesel.Orleans.EventSourcing;
