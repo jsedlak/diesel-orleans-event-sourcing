@@ -26,11 +26,28 @@ public abstract class StreamingEventSourcedGrain<TState, TEvent> : EventSourcedG
     {
         var streamProvider = this.GetStreamProvider(_streamProviderName);
 
-        var myId = this.GetPrimaryKey();
-        var streamId = StreamId.Create(_streamId, myId);
+        StreamId? streamId = null;
+
+        if (this is IGrainWithGuidKey)
+        {
+            streamId = StreamId.Create(_streamId, this.GetPrimaryKey());
+        }
+        else if (this is IGrainWithStringKey)
+        {
+            streamId = StreamId.Create(_streamId, this.GetPrimaryKeyString());
+        }
+        else if (this is IGrainWithIntegerKey)
+        {
+            streamId = StreamId.Create(_streamId, this.GetPrimaryKeyLong());
+        }
+
+        if(streamId is null)
+        {
+            throw new Exception($"Grain type {GetType().Name} does not implement a valid key interface (IGrainWithGuidKey, IGrainWithStringKey, or IGrainWithIntegerKey).");
+        }
 
         // grab a ref to the stream using the stream id
-        _eventStream = streamProvider.GetStream<TEvent>(streamId);
+        _eventStream = streamProvider.GetStream<TEvent>(streamId.Value);
 
         return base.OnActivateAsync(cancellationToken);
     }
