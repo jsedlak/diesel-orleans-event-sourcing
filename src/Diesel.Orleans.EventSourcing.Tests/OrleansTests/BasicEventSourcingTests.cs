@@ -43,8 +43,16 @@ public class BasicEventSourcingTests : OrleansTestBase<DefaultSiloConfigurator>
         var depositBalance = await bankAccount.Deposit(new DepositCommand() { Amount = 2_000 });
         var withdrawBalance = await bankAccount.Withdraw(new WithdrawCommand() { Amount = 1_000 });
         var finalBalance = await bankAccount.GetBalance();
+        var confirmedBalance = await bankAccount.GetConfirmedBalance();
 
         Assert.AreEqual(2_000, depositBalance, "Deposit balance is incorrect");
         Assert.AreEqual(1_000, finalBalance, "Final balance is incorrect");
+        Assert.AreNotEqual(confirmedBalance, finalBalance, "Confirmed balance should not match final balance immediately after deposit and withdraw operations.");
+
+        await Task.Delay(TimeSpan.FromSeconds(3));
+
+        confirmedBalance = await bankAccount.GetConfirmedBalance();
+
+        Assert.AreEqual(confirmedBalance, finalBalance, "Confirmed balance should match final balance after delay.");
     }
 }

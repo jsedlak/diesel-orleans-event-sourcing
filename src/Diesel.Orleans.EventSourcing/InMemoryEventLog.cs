@@ -30,6 +30,7 @@ public sealed class InMemoryEventLog<TView, TEvent> : IEventLog<TView, TEvent>
         dynamic e = @event;
         dynamic s = _tentativeState;
         s.Apply(e);
+        _tentativeVersion++;
     }
     
     private void ApplyConfirmed(TEvent @event)
@@ -37,6 +38,7 @@ public sealed class InMemoryEventLog<TView, TEvent> : IEventLog<TView, TEvent>
         dynamic e = @event;
         dynamic s = _confirmedState;
         s.Apply(e);
+        _confirmedVersion++;
     }
 
     private TView DeepCopy(TView input)
@@ -76,18 +78,10 @@ public sealed class InMemoryEventLog<TView, TEvent> : IEventLog<TView, TEvent>
         
         return Task.CompletedTask;
     }
-    
-    private void Apply(TEvent @event)
-    {
-        dynamic e = @event;
-        dynamic s = _tentativeState;
-        s.Apply(e);
-    }
 
     public void Submit(TEvent @event)
     {
-        Apply(@event);
-        _confirmedVersion++;
+        ApplyTentative(@event);
     }
 
     public void Submit(IEnumerable<TEvent> events)
@@ -131,13 +125,13 @@ public sealed class InMemoryEventLog<TView, TEvent> : IEventLog<TView, TEvent>
         return Task.CompletedTask;
     }
 
-    public TView TentativeView => _confirmedState;
+    public TView TentativeView => _tentativeState;
 
     public TView ConfirmedView => _confirmedState;
 
     public int ConfirmedVersion => _confirmedVersion;
 
-    public int TentativeVersion => _confirmedVersion;
+    public int TentativeVersion => _tentativeVersion;
 }
 
 internal record InMemorySnapshotIdentifier(string GrainType, string GrainId, int Version);
