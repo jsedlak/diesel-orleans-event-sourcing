@@ -80,7 +80,7 @@ public sealed class InMemoryEventLog<TView, TEvent> : IEventLog<TView, TEvent>
     private void Apply(TEvent @event)
     {
         dynamic e = @event;
-        dynamic s = _confirmedState;
+        dynamic s = _tentativeState;
         s.Apply(e);
     }
 

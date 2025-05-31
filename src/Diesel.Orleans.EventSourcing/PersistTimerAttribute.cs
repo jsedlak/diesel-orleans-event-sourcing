@@ -3,7 +3,7 @@ namespace Diesel.Orleans.EventSourcing;
 [AttributeUsage(AttributeTargets.Class)]
 public class PersistTimerAttribute : Attribute
 {
-    public static readonly TimeSpan DefaultTime = TimeSpan.FromSeconds(15);
+    public static readonly TimeSpan DefaultTime = TimeSpan.Zero;
 
     public PersistTimerAttribute()
         : this(DefaultTime.Seconds)

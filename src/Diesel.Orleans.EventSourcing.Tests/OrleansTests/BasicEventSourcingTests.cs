@@ -18,8 +18,8 @@ public class BasicEventSourcingTests : OrleansTestBase<DefaultSiloConfigurator>
         var withdrawBalance = await bankAccount.Withdraw(new WithdrawCommand() { Amount = 1_000 });
         var finalBalance = await bankAccount.GetBalance();
 
-        Assert.AreEqual(2000, depositBalance);
-        Assert.AreEqual(finalBalance, withdrawBalance);
+        Assert.AreEqual(2_000, depositBalance, "Deposit balance is incorrect");
+        Assert.AreEqual(1_000, finalBalance, "Final balance is incorrect");
     }
 
     [TestMethod]
@@ -31,8 +31,8 @@ public class BasicEventSourcingTests : OrleansTestBase<DefaultSiloConfigurator>
         var withdrawBalance = await bankAccount.Withdraw(new WithdrawCommand() { Amount = 1_000 });
         var finalBalance = await bankAccount.GetBalance();
 
-        Assert.AreEqual(2000, depositBalance);
-        Assert.AreEqual(finalBalance, withdrawBalance);
+        Assert.AreEqual(2_000, depositBalance, "Deposit balance is incorrect");
+        Assert.AreEqual(1_000, finalBalance, "Final balance is incorrect");
     }
 
     [TestMethod]
@@ -44,7 +44,7 @@ public class BasicEventSourcingTests : OrleansTestBase<DefaultSiloConfigurator>
         var withdrawBalance = await bankAccount.Withdraw(new WithdrawCommand() { Amount = 1_000 });
         var finalBalance = await bankAccount.GetBalance();
 
-        Assert.AreEqual(2000, depositBalance);
-        Assert.AreEqual(finalBalance, withdrawBalance);
+        Assert.AreEqual(2_000, depositBalance, "Deposit balance is incorrect");
+        Assert.AreEqual(1_000, finalBalance, "Final balance is incorrect");
     }
 }
